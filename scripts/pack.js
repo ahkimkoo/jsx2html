@@ -1,4 +1,5 @@
 // scripts/pack.js
+// scripts/pack.js
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
@@ -19,21 +20,13 @@ const timestamp = new Date().getTime();
 const outputFile = path.join(distDir, `output-${timestamp}.html`);
 
 // Build the project with vite
-console.log('Building project with inlined assets...');
+console.log('Building project with vite...');
 execSync('npm run build', { stdio: 'inherit', cwd: projectRoot });
 
 // Read the generated index.html and rename it with timestamp
 const builtHtmlPath = path.join(distDir, 'index.html');
 if (fs.existsSync(builtHtmlPath)) {
   fs.copyFileSync(builtHtmlPath, outputFile);
-  
-  // Remove original index.html and any other unnecessary files
-  fs.unlinkSync(builtHtmlPath);
-  const viteSvgPath = path.join(distDir, 'vite.svg');
-  if (fs.existsSync(viteSvgPath)) {
-    fs.unlinkSync(viteSvgPath);
-  }
-  
   console.log(`Successfully created: ${outputFile}`);
 } else {
   console.error('Error: Build did not produce an index.html file');
