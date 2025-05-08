@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "pack": "node scripts/pack.js"
+    "pack": "vite build --config vite.config.ts --mode production"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
