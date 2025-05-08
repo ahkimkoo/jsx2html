@@ -1,54 +1,37 @@
-# React + TypeScript + Vite
+# JSX文件一键转换为HTML网页
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+将扣子coze生成的jsx文件打包成独立完成的网页，本地运行、公网部署。
 
-Currently, two official plugins are available:
+不知道大家最近有没有遇到过这样的问题？ 在使用扣子空间的时候，扣子生成的页面都是.jsx结尾的格式，那么我要是想放在本地运行或者扣子空间jsx部署到项目部署在网站上该怎么做呢？
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+为啥要部署在自己的网站上来呢，主要是为了安全、方便、二次开发。因为最近遇到了一些问题，让我感觉有必要做一个备份。
 
-## Expanding the ESLint configuration
+初期使用Coze空间的时候，生成的是.html格式的，下载下来就能使用了；
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+再接着，发现生成的文件都是.jsx的格式的了；
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+这还不重要，重要的是我发现生成的功能只有演示效果了。
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+本项目就是用vite打包程序实现了jsx打包成html网页的功能。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 环境准备
+* nodejs: v18.18.0
+* npm: 9.8.1
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+项目克隆下来之后，运行：
 ```
+npm install
+```
+
+## 打包过程
+
+将coze空间生成的jsx下载下来，存放成src/App.jsx，没错就是替换原来的App.jsx。
+
+然后运行打包程序：
+```
+npm run build
+```
+
+然后在dist目录下就可以看到打包出来的单个html文件，拷贝到你的web服务器就可以了。
